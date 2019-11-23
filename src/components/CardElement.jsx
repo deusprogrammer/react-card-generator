@@ -24,6 +24,9 @@ export default class CardElement extends React.Component {
             height = height/100.0 * this.props.parent.height 
         }
 
+        width *= this.props.scale
+        height *= this.props.scale
+
         let x = this.props.element.x
         let y = this.props.element.y
 
@@ -39,14 +42,21 @@ export default class CardElement extends React.Component {
             y = y/100.0 * this.props.parent.height
         }
 
-        console.log(x + ", " + y)
-        console.log(width + " X " + height)
+        x *= this.props.scale
+        y *= this.props.scale
+
+        console.log("SCALE: " + this.props.scale)
+        console.log("COORD: " + x + ", " + y)
+        console.log("DIMS:  " + width + " X " + height)
 
         let contents = null
         if (this.props.element.type === "image") {
             contents = <Sprite image={data} x={0} y={0} width={width} height={height} />
         } else if (this.props.element.type === "text") {
-            contents = <Text anchor={this.props.element.anchor} x={0} y={0} text={data} style={this.props.element.fontStyle} />
+            let fontStyle = {...this.props.element.fontStyle}
+            fontStyle.fontSize *= this.props.scale
+            fontStyle.wordWrapWidth *= this.props.scale
+            contents = <Text anchor={this.props.element.anchor} x={0} y={0} text={data} style={fontStyle} />
         } else if (this.props.element.type === "container" && this.props.element.background) {
             contents = <Rectangle fill={this.props.element.background} x={0} y={0} width={width} height={height} />
         }
@@ -63,6 +73,7 @@ export default class CardElement extends React.Component {
                                 key={this.elementKey + "." + key}
                                 elementKey={key}
                                 element={element}
+                                scale={this.props.scale}
                                 parent={this.props.element}
                                 cardData={this.props.cardData} 
                                 />)
