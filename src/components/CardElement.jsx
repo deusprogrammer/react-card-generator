@@ -51,18 +51,41 @@ export default class CardElement extends React.Component {
 
         let contents = null
         if (this.props.element.type === "image") {
-            contents = <Sprite image={data} x={0} y={0} width={width} height={height} />
+            contents = <Sprite 
+                            image={data} 
+                            x={0} 
+                            y={0} 
+                            width={width} 
+                            height={height} />
         } else if (this.props.element.type === "text") {
             let fontStyle = {...this.props.element.fontStyle}
             fontStyle.fontSize *= this.props.scale
             fontStyle.wordWrapWidth *= this.props.scale
-            contents = <Text anchor={this.props.element.anchor} x={0} y={0} text={data} style={fontStyle} />
+            contents = <Text 
+                            anchor={this.props.element.anchor} 
+                            x={0} 
+                            y={0} 
+                            text={data} 
+                            style={fontStyle} />
         } else if (this.props.element.type === "container" && this.props.element.background) {
-            contents = <Rectangle fill={this.props.element.background} x={0} y={0} width={width} height={height} />
+            contents = <Rectangle 
+                            fill={this.props.element.background} 
+                            x={0} 
+                            y={0} 
+                            width={width} 
+                            height={height} />
         }
 
         return (
-            <Container x={x} y={y} width={width} height={height}>
+            <Container 
+                x={x} 
+                y={y} 
+                width={width} 
+                height={height}
+                zIndex={this.props.zIndex}
+                interactiveChildren={true}
+                interactive={true}
+                pointerdown={() => {this.props.onElementClicked(this.props.elementKey)}}>
                 {contents}
                 {
                     Object.keys(this.props.element.layout).map((key) => {
@@ -73,6 +96,8 @@ export default class CardElement extends React.Component {
                                 key={this.elementKey + "." + key}
                                 elementKey={key}
                                 element={element}
+                                onElementClicked={this.props.onElementClicked}
+                                zIndex={this.props.zIndex + 1}
                                 scale={this.props.scale}
                                 parent={this.props.element}
                                 cardData={this.props.cardData} 

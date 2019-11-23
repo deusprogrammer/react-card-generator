@@ -53,10 +53,26 @@ export default class Card extends React.Component {
             let width = scale * parseInt(this.state.cardLayout.width)
             let height = scale * parseInt(this.state.cardLayout.height)
             return (
-                <span onMouseDown={this.props.onMouseDown} onMouseUp={this.props.onMouseUp} onClick={this.props.onClick} onMouseMove={this.props.onMouseMove}>
+                <span 
+                    onMouseDown={this.props.onMouseDown} 
+                    onMouseUp={this.props.onMouseUp} 
+                    onClick={this.props.onClick} 
+                    onMouseMove={this.props.onMouseMove}>
                     <Stage options={{ transparent: true }} width={width} height={height}>
-                        <Container x={0} y={0} width={width} height={height}>
-                            <Rectangle x={0} y={0} fill={this.state.cardLayout.background} width={width} height={height} radius={20} />
+                        <Container 
+                            x={0} 
+                            y={0} 
+                            width={width} 
+                            height={height}
+                            interactiveChildren={true} >
+                            <Rectangle 
+                                x={0} 
+                                y={0} 
+                                fill={this.state.cardLayout.background} 
+                                width={width} 
+                                height={height}
+                                zIndex={0}
+                                interactiveChildren={true} />
                             {
                                 Object.keys(this.state.cardLayout.layout).map((key) => {
                                     let element = this.state.cardLayout.layout[key]
@@ -66,6 +82,8 @@ export default class Card extends React.Component {
                                             elementKey={key}
                                             element={element}
                                             scale={scale}
+                                            zIndex={10}
+                                            onElementClicked={this.props.onElementClicked}
                                             parent={this.state.cardLayout}
                                             cardData={this.state.cardData} 
                                             />)
