@@ -32,6 +32,12 @@ export default class CreateTemplate extends React.Component {
                 console.log("START: " + this.editData.x1 + ", " + this.editData.y1)
                 break
             case "SELECT":
+                this.selectData = {
+                    startX: event.nativeEvent.offsetX,
+                    startY: event.nativeEvent.offsetY,
+                    origX: parseInt(this.state.selectedElement.x),
+                    origY: parseInt(this.state.selectedElement.y)
+                }
                 break
             default:
                 break
@@ -46,14 +52,14 @@ export default class CreateTemplate extends React.Component {
                 }
         
                 let index = this.state.index
-                let cardLayout = {...this.state.cardLayout}
+                var cardLayout = {...this.state.cardLayout}
         
                 this.editData.x2 = event.nativeEvent.offsetX
                 this.editData.y2 = event.nativeEvent.offsetY
         
                 console.log("MOVE: " + this.editData.x2 + ", " + this.editData.y2)
         
-                cardLayout.layout["container-" + index] = {
+                cardLayout.layout["container" + index] = {
                     type: "container",
                     x: this.editData.x1.toString(),
                     y: this.editData.y1.toString(),
@@ -63,9 +69,24 @@ export default class CreateTemplate extends React.Component {
                     layout: {}
                 }
         
-                this.setState({cardLayout: cardLayout})
+                this.setState({cardLayout})
                 break
             case "SELECT":
+                if (!this.selectData) {
+                    return
+                }
+
+                var cardLayout = {...this.state.cardLayout}
+                var selectedElement = {...this.state.selectedElement}
+                var xDelta = event.nativeEvent.offsetX - this.selectData.startX
+                var yDelta = event.nativeEvent.offsetY - this.selectData.startY
+
+                selectedElement.x = (this.selectData.origX + xDelta).toString()
+                selectedElement.y = (this.selectData.origY + yDelta).toString()
+
+                cardLayout.layout[this.state.selectedElementKey] = selectedElement
+
+                this.setState({cardLayout})
                 break
             default:
                 break
@@ -102,6 +123,7 @@ export default class CreateTemplate extends React.Component {
                 this.setState({cardLayout: cardLayout, selectedElementKey: "container" + index, selectedElement: cardLayout.layout["container" + index], index: index + 1})
                 break
             case "SELECT":
+                this.selectData = null
                 break
             default:
                 break
@@ -111,6 +133,7 @@ export default class CreateTemplate extends React.Component {
     elementClicked = (elementName) => {
         switch(this.state.mode) {
             case "CREATE":
+                this.createParent = elementName
                 break
             case "SELECT":
                 this.setState({selectedElementKey: elementName, selectedElement: this.state.cardLayout.layout[elementName]})
