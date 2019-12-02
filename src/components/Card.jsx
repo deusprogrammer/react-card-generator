@@ -1,9 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
-import { Stage, Container } from "@inlet/react-pixi"
-import Rectangle from "../elements/Rectangle"
-import CardElement from "./CardElement"
+import CardRenderer from './CardRenderer'
 
 export default class Card extends React.Component {
     state = {
@@ -40,58 +38,16 @@ export default class Card extends React.Component {
 
     render() {
         if (this.state.cardLayout && this.state.cardData) {
-            let scale = 1.0
-
-            if (this.props.scale) {
-                scale = this.props.scale
-            } else if (this.props.width) {
-                scale = this.props.width/this.state.cardLayout.width
-            } else if (this.props.height) {
-                scale = this.props.height/this.state.cardLayout.height
-            }
-
-            let width = scale * parseInt(this.state.cardLayout.width)
-            let height = scale * parseInt(this.state.cardLayout.height)
             return (
-                <span 
-                    onMouseDown={this.props.onMouseDown} 
-                    onMouseUp={this.props.onMouseUp} 
-                    onClick={this.props.onClick} 
-                    onMouseMove={this.props.onMouseMove}>
-                    <Stage options={{ transparent: true }} width={width} height={height}>
-                        <Container 
-                            x={0} 
-                            y={0} 
-                            width={width} 
-                            height={height}
-                            interactiveChildren={true} >
-                            <Rectangle 
-                                x={0} 
-                                y={0} 
-                                fill={this.state.cardLayout.background} 
-                                width={width} 
-                                height={height}
-                                zIndex={0}
-                                interactiveChildren={true} />
-                            {
-                                Object.keys(this.state.cardLayout.layout).map((key) => {
-                                    let element = this.state.cardLayout.layout[key]
-                                    return (
-                                        <CardElement
-                                            key={key}
-                                            elementKey={key}
-                                            element={element}
-                                            scale={scale}
-                                            zIndex={10}
-                                            onElementClicked={this.props.onElementClicked}
-                                            parent={this.state.cardLayout}
-                                            cardData={this.state.cardData} 
-                                            />)
-                                })
-                            }
-                        </Container>
-                    </Stage>
-                </span>)
+                <CardRenderer
+                    cardLayout={this.state.cardLayout}
+                    cardData={this.state.cardData} 
+                    onMouseDown={() => {}} 
+                    onMouseUp={() => {}} 
+                    onClick={() => {}} 
+                    onMouseMove={() => {}}
+                    onElementClicked={() => {}}/> 
+            )
         } else {
             return null
         }
