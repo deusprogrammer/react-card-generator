@@ -4,13 +4,15 @@ import axios from 'axios'
 
 import Card from './Card'
 
+import config from '../config'
+
 export default class Cards extends React.Component {
     state = {
         cards: []
     }
 
     componentWillMount() {
-        axios.get("http://localhost:3000/cards")
+        axios.get(`${config.apiDomain}/cards`)
             .then((response) => {
                 this.setState({cards: response.data})
             })

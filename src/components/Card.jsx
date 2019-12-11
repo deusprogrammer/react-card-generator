@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 import CardRenderer from './CardRenderer'
+import config from '../config'
 
 export default class Card extends React.Component {
     state = {
@@ -22,7 +23,7 @@ export default class Card extends React.Component {
                         this.setState({cardLayout, cardData: card.data, cardMetaData: card})
                     })
         } else if (this.props.id) {
-            axios.get(`http://localhost:3000/cards/${this.props.id}`)
+            axios.get(`${config.apiDomain}/cards/${this.props.id}`)
             .then((response) => {
                 let card = response.data
                 console.log("DATA: " + JSON.stringify(card, null, 4))

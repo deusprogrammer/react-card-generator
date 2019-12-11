@@ -19,6 +19,8 @@ export default class CreateTemplate extends React.Component {
         cardData: {
             dummy: ""
         },
+        vSplit: 2,
+        hSplit: 2,
         start: {x: 0, y: 0},
         end: {x: 0, y: 0},
         totalOffset: {x: 0, y: 0}
@@ -227,7 +229,7 @@ export default class CreateTemplate extends React.Component {
         if (type === "image") {
             cardData[this.state.selectedElementName] = `https://cors-anywhere.herokuapp.com/https://dummyimage.com/100x100/fff/000&text=image`
         } else if (type === "text") {
-            selectedElement.fontFamily = {
+            selectedElement.fontStyle = {
                 fontFamily: "Arial",
                 fontSize: 18,
                 fill: 0,
@@ -333,6 +335,92 @@ export default class CreateTemplate extends React.Component {
 
         this.setState({cardLayout, selectedElement})
     }
+
+    onCardDataChanged = (cardData) => {
+        this.setState({cardData})
+    }
+
+    onCardLayoutChanged = (cardLayout) => {
+        this.setState({cardLayout})
+    }
+
+    splitV = () => {
+        var blocks = this.state.vSplit
+        var selectedElement = this.state.selectedElement
+        var index = this.state.index
+        var cardLayout = {...this.state.cardLayout}
+        var layout = {...this.state.cardLayout.layout}
+
+        var blockHeight = selectedElement.height / blocks
+        this.parentElement = selectedElement
+        this.parentElementPath = this.state.selectedElementPath
+
+        for (var i = 0; i < blocks; i++) {
+            var newElementKey = "container" + (index + i)
+            var newElement = {
+                type: "container",
+                x: (0).toString(),
+                y: (i * blockHeight).toString(),
+                width: this.parentElement.width.toString(),
+                height: blockHeight.toString(),
+                background: 0xffffff,
+                layout: {}
+            }
+
+            // Alternate background colors for nested elements
+            if (this.parentElement) {
+                if (this.parentElement.background === 0xffffff) {
+                    newElement.background = 0x000000
+                } else {
+                    newElement.background = 0xffffff
+                }
+            }
+
+            MapUtil.setPath({layout}, [...this.parentElementPath, newElementKey], newElement)
+        }
+        cardLayout.layout = layout
+
+        this.setState({cardLayout, vSplit: 2, index: index + blocks})
+    }
+
+    splitH = () => {
+        var blocks = this.state.hSplit
+        var selectedElement = this.state.selectedElement
+        var index = this.state.index
+        var cardLayout = {...this.state.cardLayout}
+        var layout = {...this.state.cardLayout.layout}
+
+        var blockWidth = selectedElement.width / blocks
+        this.parentElement = selectedElement
+        this.parentElementPath = this.state.selectedElementPath
+
+        for (var i = 0; i < blocks; i++) {
+            var newElementKey = "container" + (index + i)
+            var newElement = {
+                type: "container",
+                x: (i * blockWidth).toString(),
+                y: (0).toString(),
+                width: blockWidth.toString(),
+                height: this.parentElement.height.toString(),
+                background: 0xffffff,
+                layout: {}
+            }
+
+            // Alternate background colors for nested elements
+            if (this.parentElement) {
+                if (this.parentElement.background === 0xffffff) {
+                    newElement.background = 0x000000
+                } else {
+                    newElement.background = 0xffffff
+                }
+            }
+
+            MapUtil.setPath({layout}, [...this.parentElementPath, newElementKey], newElement)
+        }
+        cardLayout.layout = layout
+
+        this.setState({cardLayout, hSplit: 2, index: index + blocks})
+    }
     
     render() {
         return (
@@ -373,20 +461,18 @@ export default class CreateTemplate extends React.Component {
                             <label>Y</label><input onChange={(e) => {this.changeY(e.target.value)}} type="text" value={this.state.selectedElement.y} /><br />
                             <button onClick={() => {this.onCenterX()}}>Center X</button><br />
                             <button onClick={() => {this.onCenterY()}}>Center Y</button><br />
+                            <button onClick={() => {this.splitV()}}>Split Vertically Into</button><input type="number" value={this.state.vSplit} onChange={(e) => {this.setState({vSplit: e.target.value})}} /> blocks<br />
+                            <button onClick={() => {this.splitH()}}>Split Horizontally Into</button><input type="number" value={this.state.hSplit} onChange={(e) => {this.setState({hSplit: e.target.value})}} /> blocks<br />
                         </div> : null }
                     </div>
                 </div>
-                <div>
+                <div style={{display: "inline-block", margin: "2px"}}>
                     <h2>Layout JSON:</h2>
-                    <pre style={{textAlign: "left", width: "800px", margin: "auto", background: "grey", color: "white", overflowX: "scroll"}}>
-                        {JSON.stringify(this.state.cardLayout, null, 5)}
-                    </pre>
+                    <textarea style={{textAlign: "left", height: "200px", width: "400px", margin: "auto", background: "grey", color: "white", overflowX: "scroll"}} onChange={(e) => {this.onCardLayoutChanged(JSON.parse(e.target.value))}} value={JSON.stringify(this.state.cardLayout, null, 5)} />
                 </div>
-                <div>
+                <div style={{display: "inline-block", margin: "2px"}}>
                     <h2>Data JSON:</h2>
-                    <pre style={{textAlign: "left", width: "800px", margin: "auto", background: "grey", color: "white", overflowX: "scroll"}}>
-                        {JSON.stringify(this.state.cardData, null, 5)}
-                    </pre>
+                    <textarea style={{textAlign: "left", height: "200px", width: "400px", margin: "auto", background: "grey", color: "white", overflowX: "scroll"}} onChange={(e) => {this.onCardDataChanged(JSON.parse(e.target.value))}} value={JSON.stringify(this.state.cardLayout, null, 5)} value={JSON.stringify(this.state.cardData, null, 5)} />
                 </div>
             </div>
         )

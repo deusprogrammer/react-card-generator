@@ -3,6 +3,8 @@ import axios from "axios"
 
 import Card from "./Card"
 
+import config from "../config"
+
 export default class CardDetail extends React.Component {
     state = {
         cardLayout: null,
@@ -11,7 +13,7 @@ export default class CardDetail extends React.Component {
     }
 
     componentWillMount() {
-        axios.get(`http://localhost:3000/cards/${this.props.match.params.id}`)
+        axios.get(`${config.apiDomain}/cards/${this.props.match.params.id}`)
             .then((response) => {
                 let card = response.data
                 axios.get(response.data.templateHref)
