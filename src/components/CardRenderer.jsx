@@ -25,7 +25,7 @@ export default (props) => {
                 onMouseUp={props.onMouseUp} 
                 onClick={props.onClick} 
                 onMouseMove={props.onMouseMove}>
-                <Stage options={{ transparent: true }} width={width} height={height}>
+                <Stage style={{border: "1px solid black", borderRadius: "15px", padding: "2px"}} options={{ transparent: true }} width={width} height={height}>
                     <Container 
                         x={0} 
                         y={0} 

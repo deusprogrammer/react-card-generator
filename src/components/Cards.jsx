@@ -25,10 +25,10 @@ export default class Cards extends React.Component {
                 {this.state.cards.map((card) => {
                     return (
                         <div style={{float: "left"}}>
+                            <div>{card.name}</div>
                             <Link to={`/cards/${card._id}`}>
                                 <Card width={200} data={card} />
                             </Link>
-                            <div>{card.name}</div>
                         </div>
                     )
                 })}
