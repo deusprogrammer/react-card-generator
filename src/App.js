@@ -13,10 +13,10 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/cards" exact component={Cards} />
-          <Route path="/cards/:id" exact component={CardDetail} />
-          <Route path="/new/templates" exact component={CreateTemplate} />
-          <Redirect to="/cards" />
+          <Route path={`${process.env.PUBLIC_URL}/cards`} exact component={Cards} />
+          <Route path={`${process.env.PUBLIC_URL}/cards/:id`} exact component={CardDetail} />
+          <Route path={`${process.env.PUBLIC_URL}/new/templates`} exact component={CreateTemplate} />
+          <Redirect to={`${process.env.PUBLIC_URL}/cards`} />
         </Switch>
       </div>
     </Router>
