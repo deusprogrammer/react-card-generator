@@ -5,6 +5,7 @@ import axios from 'axios'
 import Card from './Card'
 
 import config from '../config'
+import AuthHelper from '../util/AuthHelper'
 
 export default class Cards extends React.Component {
     state = {
@@ -12,7 +13,7 @@ export default class Cards extends React.Component {
     }
 
     componentWillMount() {
-        axios.get(`${config.apiDomain}/cards`)
+        axios.get(`${config.apiDomain}/cards`, AuthHelper.createConfig())
             .then((response) => {
                 this.setState({cards: response.data})
             })
