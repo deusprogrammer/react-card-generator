@@ -77,7 +77,7 @@ export default class CreateCard extends React.Component {
                             </div>)
                     }
                 }) : null}
-                <button onClick={() => {this.createConfig()}}>Create Card</button>
+                <button onClick={() => {this.createCard()}}>Create Card</button>
             </Form>
         )
     }
