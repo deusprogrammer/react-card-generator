@@ -9,8 +9,8 @@ import axios from 'axios';
 axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
-    if (error.response.data.error.statusCode === 401) {
-        window.location = "https://deusprogrammer.com/util/auth/";
+    if (error.response.status === 401) {
+        window.location = "https://deusprogrammer.com/util/auth/login";
         return;
     }
     return Promise.reject(error);
