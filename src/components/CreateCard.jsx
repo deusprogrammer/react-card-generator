@@ -37,7 +37,7 @@ export default class CreateCard extends React.Component {
                     .then(response => {
                         return {
                             field: key,
-                            url: config.imageApiDomain + response.data._id
+                            url: config.imageApiDomain + "/" + response.data._id
                         }
                     })
         }))
@@ -47,7 +47,7 @@ export default class CreateCard extends React.Component {
             results.forEach(result => {
                 payload.data[result.field] = result.url
             })
-            axios.post(config.apiDomain + "/cards", payload)
+            axios.post(config.apiDomain + "/cards", payload, AuthHelper.createConfig())
                 .then(response => {
                     this.props.history.push("/cards/" + response.data._id)
                 })
