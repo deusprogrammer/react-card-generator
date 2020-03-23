@@ -6,6 +6,7 @@
   "dependencies": {
     "@inlet/react-pixi": "^1.0.0",
     "axios": "^0.19.0",
+    "informed": "^2.7.4",
     "pixi.js": "^5.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

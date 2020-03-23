@@ -17,7 +17,7 @@ export default class CardDetail extends React.Component {
         axios.get(`${config.apiDomain}/cards/${this.props.match.params.id}`, AuthHelper.createConfig())
             .then((response) => {
                 let card = response.data
-                axios.get(response.data.templateHref)
+                axios.get(response.data.templateHref, AuthHelper.createConfig())
                     .then((templateResponse) => {
                         let cardLayout = templateResponse.data
                         console.log("LAYOUT: " + JSON.stringify(cardLayout, null, 4))
