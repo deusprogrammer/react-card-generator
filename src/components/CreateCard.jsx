@@ -29,7 +29,7 @@ export default class CreateCard extends React.Component {
         this.setState({images})
     }
 
-    createCard = (formData) => {
+    createCard = () => {
         // Save all images
         Promise.all(Object.keys(this.state.images).map(key => {
             let imagePayload = this.state.images[key]
@@ -77,7 +77,7 @@ export default class CreateCard extends React.Component {
                             </div>)
                     }
                 }) : null}
-                <button onClick={() => {}}>Create Card</button>
+                <button onClick={() => {this.createConfig()}}>Create Card</button>
             </Form>
         )
     }
