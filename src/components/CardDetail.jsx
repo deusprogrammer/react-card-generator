@@ -27,6 +27,8 @@ export default class CardDetail extends React.Component {
     }
 
     render() {
+        let templateUuid = this.state.cardMetaData.templateHref.subString(this.state.cardMetaData.templateHref.lastIndexOf("/") + 1);
+
         return (
             <div>
                 { this.state.cardLayout && this.state.cardData ? 
@@ -34,6 +36,7 @@ export default class CardDetail extends React.Component {
                     <div style={{float: "left"}}>
                         <h2>{this.state.cardMetaData.name} <span style={{color: "green"}}>[{this.state.cardLayout.game}:{this.state.cardLayout.name}]</span></h2>
                         <Card id={this.props.match.params.id} />
+                        <button onClick={() => {this.props.history.push(`${process.env.PUBLIC_URL}/templates/${templateUuid}/new/card`)}}>Create Another Card Like This</button>
                     </div>
                     <div style={{float: "right"}}>
                         <h2>Layout JSON:</h2>
