@@ -59,7 +59,7 @@ export default class CreateCard extends React.Component {
             <Form getApi={formApi => this.formApi = formApi} >
                 <div><label>Card Name</label><Text field="name" /></div>
                 {this.state.cardLayout ? Object.keys(this.state.cardLayout.fields).map(key => {
-                    if (this.state.cardLayout.fields[key] === "string") {
+                    if (this.state.cardLayout.fields[key] === "text") {
                         return (
                             <div>
                                 <label>{key.toUpperCase()}</label>
