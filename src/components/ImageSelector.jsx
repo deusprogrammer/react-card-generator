@@ -11,10 +11,14 @@ export default class ImageSelector extends React.Component {
         let fr = new FileReader()
         let file = e.target.files[0]
 
-        fr.onload = () => {
-            imageNode.src = fr.result
+        const name = event.target.files[0].name;
+        const lastDot = name.lastIndexOf('.');
+        const ext = name.substring(lastDot + 1);
 
-            this.props.onChange(fr.result)
+        fr.onload = () => {
+            imageNode.src = fr.result;
+
+            this.props.onChange(fr.result, ext);
         }
 
         fr.readAsDataURL(file)

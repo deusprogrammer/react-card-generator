@@ -23,17 +23,17 @@ export default class CreateCard extends React.Component {
             })
     }
 
-    updateImage = (key, imageData) => {
+    updateImage = (key, imageData, ext) => {
         let images = {...this.state.images}
-        images[key] = imageData
+        images[key] = {imageData, ext}
         this.setState({images})
     }
 
     createCard = () => {
         // Save all images
         Promise.all(Object.keys(this.state.images).map(key => {
-            let imagePayload = this.state.images[key]
-            return axios.post(config.imageApiDomain, {imagePayload})
+            let image = this.state.images[key]
+            return axios.post(config.imageApiDomain, {imagePayload: image.imagePayload, mimeType: "image/" + image.ext})
                     .then(response => {
                         return {
                             field: key,
@@ -73,7 +73,7 @@ export default class CreateCard extends React.Component {
                                 <ImageSelector
                                     className="artwork-selector"
                                     src={this.state.images[key]}
-                                    onChange={(imageData) => {this.updateImage(key, imageData)}}/>
+                                    onChange={(imageData, ext) => {this.updateImage(key, imageData, ext)}}/>
                             </div>)
                     }
                 }) : null}
