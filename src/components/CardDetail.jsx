@@ -27,7 +27,11 @@ export default class CardDetail extends React.Component {
     }
 
     render() {
-        let templateUuid = this.state.cardMetaData.templateHref.subString(this.state.cardMetaData.templateHref.lastIndexOf("/") + 1);
+        let templateUuid = null
+        
+        if (this.state.cardMetaData && this.state.cardMetaData.templateHref) {
+            templateUuid = this.state.cardMetaData.templateHref.subString(this.state.cardMetaData.templateHref.lastIndexOf("/") + 1);
+        }
 
         return (
             <div>
