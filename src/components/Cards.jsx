@@ -27,7 +27,7 @@ export default class Cards extends React.Component {
                     return (
                         <div style={{float: "left"}}>
                             <div>{card.name}</div>
-                            <Link to={`/cards/${card._id}`}>
+                            <Link to={`${process.env.PUBLIC_URL}/cards/${card._id}`}>
                                 <Card width={200} data={card} />
                             </Link>
                         </div>
