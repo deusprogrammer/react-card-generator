@@ -72,7 +72,7 @@ export default class CreateCard extends React.Component {
                                 <label>{key.toUpperCase()}</label>
                                 <ImageSelector
                                     className="artwork-selector"
-                                    src={this.state.images[key].imageData}
+                                    src={this.state.images[key] ? this.state.images[key].imageData : ""}
                                     onChange={(imageData, ext) => {this.updateImage(key, imageData, ext)}}/>
                             </div>)
                     }
