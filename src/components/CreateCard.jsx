@@ -58,7 +58,7 @@ export default class CreateCard extends React.Component {
     render() {
         return (
             <div>
-                <h1>Create {this.state.cardLayout ? this.cardLayout.name : ""} Card {this.state.cardLayout ? " for " + this.cardLayout.game : ""}</h1>
+                <h1>Create {this.state.cardLayout ? this.state.cardLayout.name : ""} Card {this.state.cardLayout ? " for " + this.state.cardLayout : ""}</h1>
                 <Form getApi={formApi => this.formApi = formApi} >
                     <div><label>Card Name</label><Text field="name" /></div>
                     {this.state.cardLayout ? Object.keys(this.state.cardLayout.fields).map(key => {
