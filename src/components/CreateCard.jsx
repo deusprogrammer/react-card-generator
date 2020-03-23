@@ -58,7 +58,7 @@ export default class CreateCard extends React.Component {
         return (
             <Form getApi={formApi => this.formApi = formApi} >
                 <div><label>Card Name</label><Text field="name" /></div>
-                {Object.keys(this.state.cardLayout.fields).map(key => {
+                {this.state.cardLayout ? Object.keys(this.state.cardLayout.fields).map(key => {
                     if (this.state.cardLayout.fields[key] === "string") {
                         return (
                             <div>
@@ -76,7 +76,7 @@ export default class CreateCard extends React.Component {
                                     onChange={(imageData) => {this.updateImage(key, imageData)}}/>
                             </div>)
                     }
-                })}
+                }) : null}
                 <button onClick={() => {}}>Create Card</button>
             </Form>
         )
