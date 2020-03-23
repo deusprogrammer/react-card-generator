@@ -57,29 +57,32 @@ export default class CreateCard extends React.Component {
 
     render() {
         return (
-            <Form getApi={formApi => this.formApi = formApi} >
-                <div><label>Card Name</label><Text field="name" /></div>
-                {this.state.cardLayout ? Object.keys(this.state.cardLayout.fields).map(key => {
-                    if (this.state.cardLayout.fields[key] === "text") {
-                        return (
-                            <div>
-                                <label>{key.toUpperCase()}</label>
-                                <Text field={`data.${key}`} />
-                            </div>
-                        )
-                    } else if (this.state.cardLayout.fields[key] === "image") {
-                        return (
-                            <div>
-                                <label>{key.toUpperCase()}</label>
-                                <ImageSelector
-                                    className="artwork-selector"
-                                    src={this.state.images[key] ? this.state.images[key].imageData : ""}
-                                    onChange={(imageData, ext) => {this.updateImage(key, imageData, ext)}}/>
-                            </div>)
-                    }
-                }) : null}
-                <button onClick={() => {this.createCard()}}>Create Card</button>
-            </Form>
+            <div>
+                <h1>Create {this.state.cardLayout ? this.cardLayout.name : ""} Card {this.state.cardLayout ? " for " + this.cardLayout.game : ""}</h1>
+                <Form getApi={formApi => this.formApi = formApi} >
+                    <div><label>Card Name</label><Text field="name" /></div>
+                    {this.state.cardLayout ? Object.keys(this.state.cardLayout.fields).map(key => {
+                        if (this.state.cardLayout.fields[key] === "text") {
+                            return (
+                                <div>
+                                    <label>{key.toUpperCase()}</label>
+                                    <Text field={`data.${key}`} />
+                                </div>
+                            )
+                        } else if (this.state.cardLayout.fields[key] === "image") {
+                            return (
+                                <div>
+                                    <label>{key.toUpperCase()}</label>
+                                    <ImageSelector
+                                        className="artwork-selector"
+                                        src={this.state.images[key] ? this.state.images[key].imageData : ""}
+                                        onChange={(imageData, ext) => {this.updateImage(key, imageData, ext)}}/>
+                                </div>)
+                        }
+                    }) : null}
+                    <button onClick={() => {this.createCard()}}>Create Card</button>
+                </Form>
+            </div>
         )
     }
 }

@@ -39,7 +39,7 @@ export default class CardDetail extends React.Component {
                 <div>
                     <div style={{float: "left"}}>
                         <h2>{this.state.cardMetaData.name} <span style={{color: "green"}}>[{this.state.cardLayout.game}:{this.state.cardLayout.name}]</span></h2>
-                        <Card id={this.props.match.params.id} />
+                        <Card id={this.props.match.params.id} /><br />
                         <button onClick={() => {this.props.history.push(`${process.env.PUBLIC_URL}/templates/${templateUuid}/new/card`)}}>Create Another Card Like This</button>
                     </div>
                     <div style={{float: "right"}}>
