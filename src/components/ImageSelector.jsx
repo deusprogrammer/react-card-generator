@@ -11,7 +11,7 @@ export default class ImageSelector extends React.Component {
         let fr = new FileReader()
         let file = e.target.files[0]
 
-        const name = event.target.files[0].name;
+        const name = e.target.files[0].name;
         const lastDot = name.lastIndexOf('.');
         const ext = name.substring(lastDot + 1);
 
