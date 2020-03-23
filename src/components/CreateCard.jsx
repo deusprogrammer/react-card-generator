@@ -47,7 +47,7 @@ export default class CreateCard extends React.Component {
             results.forEach(result => {
                 payload.data[result.field] = result.uri
             })
-            axios.post(config.apiDomain, payload)
+            axios.post(config.apiDomain + "/cards", payload)
                 .then(response => {
                     this.props.history.push("/cards/" + response.data._id)
                 })
