@@ -5,6 +5,7 @@ import axios from 'axios'
 import {Form, Text} from 'informed'
 
 import ImageSelector from './ImageSelector'
+import AuthHelper from '../util/AuthHelper'
 
 import config from '../config'
 
@@ -18,7 +19,7 @@ export default class CreateCard extends React.Component {
         axios.get(config.apiDomain + this.props.match.params.id, AuthHelper.createConfig())
             .then((templateResponse) => {
                 let cardLayout = templateResponse.data
-                this.setState({cardLayout, cardData: card.data, cardMetaData: card})
+                this.setState({cardLayout})
             })
     }
 
