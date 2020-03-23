@@ -16,7 +16,7 @@ export default class CreateCard extends React.Component {
     }
 
     componentWillMount() {
-        axios.get(config.apiDomain + this.props.match.params.id, AuthHelper.createConfig())
+        axios.get(config.apiDomain + "/templates/" + this.props.match.params.id, AuthHelper.createConfig())
             .then((templateResponse) => {
                 let cardLayout = templateResponse.data
                 this.setState({cardLayout})
