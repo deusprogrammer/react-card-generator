@@ -10,7 +10,7 @@ axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     if (error.response.status === 401) {
-        window.location = "https://deusprogrammer.com/util/auth/login";
+        window.location = "https://deusprogrammer.com/util/auth/login?redirect=http://deusprogrammer.com/util/cardgen/";
         return;
     }
     return Promise.reject(error);
