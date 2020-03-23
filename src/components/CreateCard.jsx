@@ -33,7 +33,7 @@ export default class CreateCard extends React.Component {
         // Save all images
         Promise.all(Object.keys(this.state.images).map(key => {
             let image = this.state.images[key]
-            return axios.post(config.imageApiDomain, {imagePayload: image.imagePayload, mimeType: "image/" + image.ext})
+            return axios.post(config.imageApiDomain, {imagePayload: image.imageData, mimeType: "image/" + image.ext})
                     .then(response => {
                         return {
                             field: key,
@@ -72,7 +72,7 @@ export default class CreateCard extends React.Component {
                                 <label>{key.toUpperCase()}</label>
                                 <ImageSelector
                                     className="artwork-selector"
-                                    src={this.state.images[key]}
+                                    src={this.state.images[key].imageData}
                                     onChange={(imageData, ext) => {this.updateImage(key, imageData, ext)}}/>
                             </div>)
                     }
