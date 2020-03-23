@@ -73,7 +73,7 @@ export default class CreateCard extends React.Component {
                                     className="artwork-selector"
                                     src={this.state.images[key]}
                                     onChange={(imageData) => {this.updateImage(key, imageData)}}/>
-                            </div>
+                            </div>)
                     }
                 })}
                 <button onClick={() => {}}>Create Card</button>
