@@ -31,7 +31,7 @@ export default class CreateCard extends React.Component {
 
     createCard = (formData) => {
         // Save all images
-        Promise.all(Object.keys(this.state.images).map(image => {
+        Promise.all(Object.keys(this.state.images).map(key => {
             let imagePayload = this.state.images[key]
             return axios.post(config.apiDomain, {imagePayload})
                     .then(response => {
