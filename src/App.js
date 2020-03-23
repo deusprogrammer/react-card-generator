@@ -17,7 +17,7 @@ function App() {
           <Route path={`${process.env.PUBLIC_URL}/cards`} exact component={Cards} />
           <Route path={`${process.env.PUBLIC_URL}/cards/:id`} exact component={CardDetail} />
           <Route path={`${process.env.PUBLIC_URL}/new/templates`} exact component={CreateTemplate} />
-          <Route path={`${process.env.PUBLIC_URL}/new/cards`} exact component={CreateCard} />
+          <Route path={`${process.env.PUBLIC_URL}/templates/:id/new/card`} exact component={CreateCard} />
           <Redirect to={`${process.env.PUBLIC_URL}/cards`} />
         </Switch>
       </div>

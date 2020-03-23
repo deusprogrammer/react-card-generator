@@ -27,6 +27,12 @@ body * {
   color: #61dafb;
 }
 
+.artwork-selector {
+  object-fit: contain;
+  height: 150px;
+  width: 150px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
