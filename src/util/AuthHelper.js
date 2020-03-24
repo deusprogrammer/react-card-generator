@@ -2,7 +2,7 @@ export default {
     createConfig: () => {
         return {
             headers: {
-                "Authorization": `Bearer ${window.localStorage.getItem("jwt")}`
+                "X-Access-Token": window.localStorage.getItem("accessToken")
             }
         }
     }
