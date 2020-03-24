@@ -45,6 +45,7 @@ export default class CreateCard extends React.Component {
         .then(results => {
             let payload = {...this.formApi.getState().values}
             payload.templateHref = config.apiDomain + "/templates/" + this.props.match.params.id
+            payload.template = this.props.match.params.id
             results.forEach(result => {
                 payload.data[result.field] = result.url
             })
