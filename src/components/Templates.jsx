@@ -25,7 +25,17 @@ export default class Templates extends React.Component {
                 {this.state.templates.map(template => {
                     return (
                         <Link to={`${process.env.PUBLIC_URL}/templates/${template._id}/cards`}>
-                            <span style={{display: "inline-block", height: "200px", lineHeight: "200px", background: "gray", color: "white", borderRadius: "10px"}}>
+                            <span style={{
+                                display: "inline-block", 
+                                float: "left",
+                                height: "100px", 
+                                lineHeight: "100px", 
+                                background: "gray", 
+                                color: "white", 
+                                borderRadius: "10px",
+                                padding: "0px 10px 0px 10px",
+                                margin: "0px 10px 0px 10px"
+                            }}>
                                 {template.game + ":" + template.name}
                             </span>
                         </Link>
