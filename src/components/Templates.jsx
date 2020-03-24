@@ -1,6 +1,9 @@
 import React from 'react'
-
+import axios from 'axios'
 import {Link} from 'react-router-dom'
+
+import AuthHelper from '../util/AuthHelper'
+import config from '../config'
 
 export default class Templates extends React.Component {
     state = {
