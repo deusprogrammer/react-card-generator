@@ -26,6 +26,10 @@ function App() {
           <Route path={`${process.env.PUBLIC_URL}/templates/:id/cards`} exact component={CardsByTemplate} />
           <Redirect to={`${process.env.PUBLIC_URL}/templates`} />
         </Switch>
+	<div style={{clear: "both", position: "absolute", bottom: "0px", textAlign: "center", width: "100%"}}>
+	  <p>Want to contribute to this project?</p>
+	  <p>Check us out at https://github.com/deusprogrammer/react-card-generator</p>
+	</div>
       </div>
     </Router>
   )

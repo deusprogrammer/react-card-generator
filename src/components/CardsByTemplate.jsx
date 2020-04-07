@@ -33,6 +33,7 @@ export default class CreateCard extends React.Component {
         return (
             <div>
                 <h1>{this.state.cardLayout ? this.state.cardLayout.name : ""} Cards {this.state.cardLayout ? " for " + this.state.cardLayout.game : ""}</h1>
+		<div>
                 {this.state.cards.map((card) => {
                     return (
                         <div style={{float: "left"}}>
@@ -43,6 +44,10 @@ export default class CreateCard extends React.Component {
                         </div>
                     )
                 })}
+		</div>
+		<div style={{clear: "both"}}>
+                    <button onClick={() => {this.props.history.push(`${process.env.PUBLIC_URL}/templates/${this.state.cardLayout._id}/new/card`)}}>Create {this.state.cardLayout ? this.state.cardLayout.name : ""} Card {this.state.cardLayout ? " for " + this.state.cardLayout.game : ""}</button>
+		</div>
             </div>
         )
     }
